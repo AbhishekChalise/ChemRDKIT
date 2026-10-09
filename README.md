@@ -50,5 +50,3 @@ something. Sugar binds nothing disease-relevant.
 3. Count Lipinski violations → verdict: PASS / BORDERLINE / FAIL
 
 ---
-
-## 📊 Sample Output
