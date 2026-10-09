@@ -1,25 +1,54 @@
-# ChemRDKIT
 
-#  A Drug-Likeness analyzer build using RDKit
+- `:` = lone pair (concentrated cloud of negative charge)
+- `-----` = the electrostatic attraction
 
- - To be accepted as a drug it should satisfiy the Lipinski rules
- - HBD: Hydrogen Bond Donors : Compound like N-H and O-H are hydrogen bond donors because H is delta positive and N and O are Negative, they pull the electron from the hydrogen slihtly harder and make the Hydrogen delta positive.
- - HBA: Hydrogen Bond Acceptors: Compounds like Oxygen and Nitrogen has lone pairs, Lone pairs are negative and these from a electrostatic attraction with the Hydrogen atom
+### MW — Molecular Weight (< 500)
 
- O-H ------ :O or O-H -------- : N
+The molecule should be light enough to travel and 
+cross membranes.
 
- : is lone pair concentrated cloud of negative charge.
- ----- is the electrostatic force.
+### LogP — Lipophilicity / Greasiness (≤ 5)
 
-Molecular Weight: Its molecular weight should be less than 500 
+LogP measures how a drug distributes between water 
+and octanol (a greasy alcohol used to mimic body fat).
 
-LogP(Lipopilicity/Greasiness): LogP <= 5 (This measures how a drug distributes in water and octanol a type of greasy alcohol used to mimic human body fat
--2 means highly water soluble and hate oil and +3 means it dissolve well in oil so lipinski had a rule <=5 to keep balance in solubility in water and dissolvavibility in oil.
-If too fat lovable wont dissolve in water and if too water lover wont dissolve in oil)
+- LogP = -2 → highly water-soluble, hates oil
+- LogP = +3 → dissolves well in oil
 
+Lipinski set ≤ 5 to balance: dissolve in blood (water) 
+BUT still cross fatty membranes. Too fat-loving = 
+won't dissolve in blood. Too water-loving = won't 
+cross membranes.
 
-Sugar passes every Lipinski rule, yet it's not a medicine. Why? Lipinski is a FILTER, not a judge it only checks if a molecule is SHAPE-compatible with being a pill (size, oiliness, H-bond hands). 
-Being a drug ALSO requires BINDING a disease target and treating something. Sugar binds nothing disease-relevant. Filters let it in; function makes it medicine.
+---
 
-Fun Fact, Sugar is so important in the body the proteins take sugar molecule and break it and in that process energy is release which is used by the body, 
-another thing proteins use sugar chain to make an id card for itself so that immune system wont attact it.
+## 💡 Key Insight: Why Isn't Sugar a Drug?
+
+Sugar passes EVERY Lipinski rule — yet it's not medicine.
+
+**Lipinski is a FILTER, not a judge.** It only checks 
+if a molecule is SHAPE-compatible with being a pill 
+(size, oiliness, H-bond hands). Being a drug ALSO 
+requires binding a disease target and treating 
+something. Sugar binds nothing disease-relevant.
+
+**Filters let it in — function makes it medicine.**
+
+### 🧬 Fun Facts I Discovered
+
+- **Glycolysis:** Proteins take sugar molecules and 
+  break them down — releasing energy the body uses!
+- **Glycosylation:** Proteins use sugar chains as 
+  ID cards, so the immune system won't attack them.
+
+---
+
+## ⚙️ How It Works
+
+1. Parse SMILES string → molecule object (`Chem.MolFromSmiles`)
+2. Calculate 4 descriptors: MolWt, MolLogP, NumHDonors, NumHAcceptors
+3. Count Lipinski violations → verdict: PASS / BORDERLINE / FAIL
+
+---
+
+## 📊 Sample Output
